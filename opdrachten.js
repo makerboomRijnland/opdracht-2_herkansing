@@ -12,9 +12,7 @@ function showWelcome() {
     document.getElementById('welkom').innerHTML = welkom;
 }
 
-
-
-
+showWelcome();
 
 
 /**
@@ -30,9 +28,12 @@ function showWelcome() {
  * Roep de functie `showNummer` aan.
  */
 
+function showNummer() {
+    let studentnummer = 0123456;
+    document.getElementById('studentnummer').innerHTML = studentnummer;
+}
 
-
-
+showNummer();
 
 
 /**
@@ -46,9 +47,12 @@ function showWelcome() {
  * Koppel de functie 'changeBackgroundColor' aan het 'click' event van de button met ID=kleur-show
  */
 
+function changeBackgroundColor() {
+    let kleur = document.getElementById('kleur').value;
+    document.getElementById('kleur-section').style.backgroundColor = kleur;
+}
 
-
-
+document.getElementById('kleur-show').addEventListener('click', changeBackgroundColor);
 
 
 /**
@@ -56,7 +60,7 @@ function showWelcome() {
  * OPDRACHT 4. Party of niet
  * 
  * Schrijf de functie genaamd: `showPartyOrNot`, met hierin code die:
- *   - de `value` van het element met ID=party-boete opslaat in de variabele `boete`
+ *   - de `value` van het element met ID=boete opslaat in de variabele `boete`
  *   - afhankelijk van de waarde van deze boete, toon of het feest door gaat of niet,
  *     door "Ja", "Nee", of "Misschien" te plaatsen in het element met ID=party-tonight:
  *      - Als de boete meer is dan 10000, dan gaat het feest niet door
@@ -66,7 +70,18 @@ function showWelcome() {
  * Koppel de functie 'showPartyOrNot' aan het 'click' event van de button met ID='party-show'
  */
 
+function showPartyOrNot() {
+    let boete = document.getElementById('boete').value;
+    if(boete > 10000) {
+        document.getElementById('party-tonight').innerHTML = "Nee";
+    } else if(boete < 5000) {
+        document.getElementById('party-tonight').innerHTML = "Ja";
+    } else {
+        document.getElementById('party-tonight').innerHTML = "Misschien";
+    }
+}
 
+document.getElementById('party-show').addEventListener('click', showPartyOrNot);
 
 
 
@@ -93,28 +108,40 @@ function showWelcome() {
  * 
  */
 
+function showMyNames() {
+    let naamdelen = ["Marcel", null, "Akerboom"];
+    document.getElementById('mijn-voornaam').innerHTML = naamdelen[0];
+    document.getElementById('mijn-tussenvoegsel').innerHTML = naamdelen[1];
+    document.getElementById('mijn-achternaam').innerHTML = naamdelen[2];
 
+    let naam = naamdelen[0] + " " + naamdelen[2];
+    document.getElementById('mijn-naam').innerHTML = naam;
 
+}
 
-
+showMyNames();
 
 
 /**
  * 
  * OPDRACHT 6. Upcase funk is gonna get ya
  * 
- * Schrijf de functie genaamd: `upcaseFunk`, met hierin code die:
+ * Schrijf de functie genaamd: `upCaseFunk`, met hierin code die:
  *   - de HTML elementen met de class 'funk' opslaat in de variabele: `funk`
  *   - Voor elk element in die array:
- *     - Geef deze de CSS eigenschap "text-transformation: uppercase"
+ *     - Geef deze de CSS eigenschap "text-transform: uppercase"
  * 
  * Koppel de functie 'upCaseFunk' aan het 'click' event van de button met ID='upcase-funk'
  */
 
+function upCaseFunk() {
+    let funk = document.getElementsByClassName('funk');
+    for(let index = 0; index < funk.length; index++) {
+        funk[index].style.textTransform = "uppercase";
+    }
+}
 
-
-
-
+document.getElementById('upcase-funk').addEventListener('click', upCaseFunk);
 
 
 /**
@@ -122,7 +149,7 @@ function showWelcome() {
  * OPDRACHT 7. Kleur titels
  * 
  * Schrijf de functie genaamd: `kleurTitels`, met hierin code die:
- *   - de HTML elementen met de tag h1 opslaat in de variabele: `titels`
+ *   - de HTML elementen met de tag h2 opslaat in de variabele: `titels`
  *   - Voor elk element in die array:
  *     - Maak de tekstkleur blauw
  * 
@@ -130,7 +157,14 @@ function showWelcome() {
  */
 
 
+ function kleurTitels() {
+    let titels = document.getElementsByTagName('h2');
+    for(let index = 0; index < titels.length; index++) {
+        titels[index].style.color = "blue";
+    }
+}
 
+document.getElementById('kleur-titels').addEventListener('click', kleurTitels);
 
 
 
@@ -150,10 +184,29 @@ function showWelcome() {
  *     - Indien het geen van de bovenstaande is
  *       Verander de body background color naar 'black'
  * 
- * Zorg ervoor dat de functie wordt aangeroepen bij een klik op de knop met ID=kleur-body
+ * Zorg ervoor dat de functie 'changeBodyBackground' wordt aangeroepen bij een klik op de knop met ID=kleur-body
  */
 
 
+ function changeBodyBackground() {
+    let color = document.body.style.backgroundColor;
+
+    switch(color) {
+        case 'black': 
+            document.body.style.backgroundColor = 'cyan';
+            break;
+        case 'cyan': 
+            document.body.style.backgroundColor = 'navajowhite';
+            break;
+        case 'navajowhite': 
+            document.body.style.backgroundColor = 'pink';
+            break;
+        default:
+            document.body.style.backgroundColor = 'black';
+    }
+}
+
+document.getElementById('kleur-body').addEventListener('click', changeBodyBackground);
 
 
 
@@ -166,11 +219,21 @@ function showWelcome() {
  *   - Sla de waarde uit het element met ID=padding op in de variabele `padding`
  *   - Een variabele `sections` aanmaakt, met als waarde alle elementen met de tag "section"
  *   - Voor elk element in de Array `sections`:
- *     - Geef deze de waarde uit de variabele `padding` als padding.
+ *     - Geef deze de waarde uit de variabele `padding` als padding. (vergeet 'px' niet toe te voegen)
  * 
  * Zorg ervoor dat de functie wordt aangeroepen bij een klik op de knop ID=bietje-padding
  */
 
+
+ function eenBietjePadding() {
+    let padding = document.getElementById('padding').value;
+    let sections = document.getElementsByTagName('section');
+    for(let index = 0; index < sections.length; index++) {
+        sections[index].style.padding = padding + 'px';
+    }
+}
+
+document.getElementById('bietje-padding').addEventListener('click', eenBietjePadding);
 
 
 
@@ -192,7 +255,16 @@ function showWelcome() {
 
 
 
+ function breakSite() {
+    let articles = document.getElementsByTagName('article');
+    for(let index = 0; index < articles.length; index++) {
+        articles[index].style.position = 'absolute';
+        articles[index].style.top = 0;
+        articles[index].style.left = 0;
+    }
+}
 
+document.getElementById('break-site').addEventListener('click', breakSite);
 
 
 /**
